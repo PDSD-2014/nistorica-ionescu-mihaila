@@ -1,8 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Travel_Client</string>
+    <string name="app_name">Travel Helper</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_image_view">ImageViewActivity</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+	<string name="title_activity_location">Location</string>
+	 <!-- Log in activity -->
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="LogInButton">Log In</string>
+    <string name="RegisterLink">Sign Up</string>
+    <string name="LogInMessage">Log In</string>
+    <string name="Remember">Remember User</string>
+
+    <!-- Sign Up -->
+    <string name="RegisterMessage">Create new account</string>
+    <string name="newUsername">New Username</string>
+    <string name="newPassword">New Password</string>
+    <string name="retypePass">Re-enter password</string>
+    <string name="mail">E-mail address</string>
+    <string name="registerButton">Sign up</string>
+    <string name="title_activity_first">Loading &#8230;</string>
+
+	<string name="action_logout">Logout</string>
+	
+	<!-- Location Layouts -->
+	<string name="AddRating">Add Rating</string>
+	<string name="DefaultComment">Comentariu</string>
+	<string name="RateButton">Vote</string>
+	<string name="AddToMyPlaces">Add to my places</string>
+	<string name="RemoveFromMyPlaces">Unsubscribe</string>
+	<string name="LocationDesc">Description: </string>
+	<string name="LocationCreateDate">Created on: </string>
+	<string name="LocRating">Location rating: </string>
+	<string name="LocCreatedBy">Created by: </string>	
+	<string name="LocName">Location Name </string>
+
+	<string name="AddUpdate">Add Update</string>
+	<string name="UpdateVideoLink">Video Link</string>
+	<string name="UpdateReview">Enter Review</string>
+	<string name="UpdateButton">Add</string>
+	<string name="UpdateSelectPhoto">Select Photo</string>
+	
+	<string name="RadioVideo">Video</string>
+	<string name="RadioImage">Photo</string>
+	<string name="RadioText">Text</string>
+	
+	<!-- Main Activity -->
+	<string name="MapButton">Switch to map view</string>
+	<string name="PostedBy">Posted By</string>
+	
+	<!-- User Profile -->
+
+	<string name="UsernameTitle">Username : </string>
+	<string name="RatingTitle">Rating : </string>
+	<string name="NameTitle">Name : </string>
+	<string name="SurnameTitle">Surname : </string>
+	<string name="MailTitle">Mail : </string>
+	<string name="UserPostsTitle">User\'s posts</string>
 
 </resources>
