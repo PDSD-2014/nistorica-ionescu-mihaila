@@ -4,9 +4,6 @@ package com.pdsd.project.main;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
-
-
 
 import org.json.JSONArray;
 import org.json.JSONException;
