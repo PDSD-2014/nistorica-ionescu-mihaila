@@ -1,1 +1,3 @@
 Scriptul initializeaza tabela travel-server.
+
+Comanda pentru initializare baza de date: mysql -u root -p < init_database.sql
