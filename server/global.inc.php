@@ -1,11 +1,11 @@
-<?php 
+<?php
 
 
-define('DB_HOST', '54.72.182.209/server');
-define('DB_USER', '1554156_travel');
-define('DB_PASS', '#Travelhelper17');
-define('DB_NAME', '1554156_travel');
- 
+define('DB_HOST', '127.0.0.1');
+define('DB_USER', 'root');
+define('DB_PASS', 'PDSD-proj-01');
+define('DB_NAME', 'travel_server');
+
 
 define('DB_PORT', 3306 );
 define('COORD_MARGIN', 0.5);
