@@ -51,6 +51,11 @@ public class MainActivity extends Activity{
     	finish();
     }
 	
+	public void goToAddLocation(){
+		Intent intent = new Intent(this,AddLocationActivity.class);
+		startActivity(intent);
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
@@ -60,6 +65,9 @@ public class MainActivity extends Activity{
 		case R.id.action_logout:
 			Session.LogOut(this);
 			goToFirstActivity();
+			break;
+		case R.id.add_location:
+			goToAddLocation();
 			break;
 		default:
 			break;
