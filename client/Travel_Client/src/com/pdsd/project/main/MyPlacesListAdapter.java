@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
 
+import location.LocationActivity;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -189,7 +191,9 @@ public class MyPlacesListAdapter extends BaseAdapter {
 	     @Override
 	     public void onClick(View v)
 	     {
-	    	 /*TODO*/
+	    	 Intent intent = new Intent(mContext, LocationActivity.class);
+			 intent.putExtra("location_id", myVariable);
+			 mContext.startActivity(intent);
 	     }
 
 	  };
@@ -205,7 +209,9 @@ public class MyPlacesListAdapter extends BaseAdapter {
 	     @Override
 	     public void onClick(View v)
 	     {
-				/*TODO*/
+	    		Intent intent = new Intent(mContext,UserProfileActivity.class);
+				intent.putExtra("username", myVariable);
+				mContext.startActivity(intent);
 	     }
 
 	  };
