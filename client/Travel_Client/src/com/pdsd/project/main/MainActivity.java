@@ -1,10 +1,14 @@
 package com.pdsd.project.main;
 
+import login.FirstActivity;
+import login.Session;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class MainActivity extends Activity{
 
@@ -39,6 +43,28 @@ public class MainActivity extends Activity{
 		MenuInflater inflater = getMenuInflater();
 	    inflater.inflate(R.menu.main, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+	
+	public void goToFirstActivity() {
+		Intent intent = new Intent(this, FirstActivity.class);
+		startActivity(intent);
+    	finish();
+    }
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.search:
+			break;
+		case R.id.action_logout:
+			Session.LogOut(this);
+			goToFirstActivity();
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	
