@@ -32,7 +32,7 @@ import com.pdsd.project.main.UserProfileActivity;
 
 public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 	
-	private String URL="http://travelhelper.mywebcommunity.org/";
+	private String URL="http://54.72.182.209/server/";
 	private String functionName;
 	private Map<String, String> parameters;
 	private HttpResponse response;

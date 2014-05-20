@@ -71,7 +71,7 @@ public class UploadServerTask extends AsyncTask<Void, Void, String>  {
 		DataOutputStream outputStream = null;
 
 		String pathToOurFile = this.filePath;
-		String urlServer = "http://happy-box.ro/travelhelper/upload_photo.php";
+		String urlServer = "http://54.72.182.209/server/upload_photo.php";
 		String lineEnd = "\r\n";
 		String twoHyphens = "--";
 		String boundary =  "*****";
