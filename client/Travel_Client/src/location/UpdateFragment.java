@@ -21,10 +21,9 @@ import comunication.UploadServerTask;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
+
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -179,7 +178,7 @@ public class UpdateFragment extends Fragment {
 			Uri selectedImageUri = data.getData();
 			switch(requestCode ){
 				case SELECT_FILE_CODE : {
-					String path = getPath(selectedImageUri);
+					String path = selectedImageUri.getPath();
 					UploadServerTask ust = new UploadServerTask(path,getActivity());
 					ust.execute();
 				}break;
@@ -209,18 +208,4 @@ public class UpdateFragment extends Fragment {
 		((Button)updateLayout.findViewById(R.id.select_photo)).setEnabled(false);
 	}
 		
-	 public String getPath(Uri uri) {
-
-	        String[] projection = { MediaStore.Images.Media.DATA };
-
-	        Cursor cursor = getActivity().getContentResolver().query(uri, projection, null, null, null);
-
-	        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-
-	        cursor.moveToFirst();
-
-	        return cursor.getString(column_index);
-
-	    }
-	
 }
