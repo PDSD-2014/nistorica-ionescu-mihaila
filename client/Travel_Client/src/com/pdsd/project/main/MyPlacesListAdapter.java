@@ -4,11 +4,14 @@ package com.pdsd.project.main;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 import location.LocationActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import comunication.ImageLoader;
 
 import android.content.Context;
 import android.content.Intent;
@@ -129,34 +132,45 @@ public class MyPlacesListAdapter extends BaseAdapter {
 		}
 		holder.location.setOnClickListener(new MyLocationOnClickListener(holder.loc_id));
 		
-		if (flagVideo == 3){
-			holder.image.setVisibility(View.VISIBLE);
-			holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.video));
-			holder.image.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlMedia)));
-				}
-			});
-		}else if (flagVideo == 2){
-			holder.image.setVisibility(View.VISIBLE);
-			//this.bmp = new ImageLoader().execute(urlMedia).get();
-			holder.image.setImageBitmap(bmp);
-			holder.image.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					ByteArrayOutputStream stream = new ByteArrayOutputStream();
-					bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-					byte[] byteArray = stream.toByteArray();
-					Intent intent = new Intent(mContext,ImageViewActivity.class);
-					intent.putExtra("image",byteArray);
-					mContext.startActivity(intent);
-				}
-			});
+		//set image
+		try {
+			if (flagVideo == 3){
+				holder.image.setVisibility(View.VISIBLE);
+				holder.image.setImageDrawable(mContext.getResources().getDrawable(R.drawable.video));
+				holder.image.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						mContext.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(urlMedia)));
+					}
+				});
+			}else if (flagVideo == 2){
+				holder.image.setVisibility(View.VISIBLE);
+				this.bmp = new ImageLoader().execute(urlMedia).get();
+				holder.image.setImageBitmap(bmp);
+				holder.image.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						ByteArrayOutputStream stream = new ByteArrayOutputStream();
+						bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+						byte[] byteArray = stream.toByteArray();
+						Intent intent = new Intent(mContext,ImageViewActivity.class);
+						intent.putExtra("image",byteArray);
+						mContext.startActivity(intent);
+					}
+				});
+			}
+		
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+
 		//set user click
 		try {
 			holder.user_id = jsonArray.getJSONObject(position).getString("user_id");
