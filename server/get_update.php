@@ -11,7 +11,9 @@
 		die("Incorrect message");
 	}
  	$message = $_GET;
+	echo $message;
 	$type = $message['type'];
+	echo $type;
 	switch($type){
 		
 		case '1' : {
@@ -28,6 +30,7 @@
 																		ORDER BY up.date DESC";
 			
 			
+			echo $query;
 			$result = $db->query($query);
 			if(!$result) {$response=null; break;}
 			$response=array();
