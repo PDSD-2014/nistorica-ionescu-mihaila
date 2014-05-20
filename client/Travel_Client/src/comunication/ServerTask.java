@@ -25,6 +25,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.pdsd.project.main.Common;
+import com.pdsd.project.main.MyPlacesFragment;
+import com.pdsd.project.main.NewsFeedFragment;
 import com.pdsd.project.main.UserProfileActivity;
 
 
@@ -158,10 +160,10 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 		if (this.functionName.equals("get_update.php")) {
 			String type = this.parameters.get("type");
 			if (type.equals("1")) {
-				//MyPlacesFragment.onPostExecute(act, this.finalResult);
+				MyPlacesFragment.onPostExecute(act, this.finalResult);
 			}
 			else if (type.equals("2")) {
-				//NewsFeedFragment.onPostExecute(act, this.finalResult);
+				NewsFeedFragment.onPostExecute(act, this.finalResult);
 			}
 			else if (type.equals("3")){
 				UpdateFragment.onPostExecute(act, this.finalResult);
