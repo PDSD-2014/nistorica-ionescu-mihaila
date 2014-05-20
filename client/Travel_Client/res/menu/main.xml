@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item android:id="@+id/search"
-          android:title="Search Location"
+          android:title="@string/search_location"
           android:icon="@drawable/action_search"
           android:showAsAction="always"
           android:orderInCategory="100"
@@ -12,5 +12,12 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_logout"/>
+    
+    <item
+        android:id="@+id/add_location"
+        android:showAsAction="never"
+        android:title="@string/add_location"
+        android:orderInCategory="50"
+    />
 
 </menu>

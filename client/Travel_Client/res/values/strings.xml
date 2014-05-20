@@ -6,8 +6,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_image_view">ImageViewActivity</string>
     <string name="title_activity_user_profile">UserProfileActivity</string>
-	<string name="title_activity_location">Location</string>
-	 <!-- Log in activity -->
+    <string name="title_activity_location">Location</string>
+    <!-- Log in activity -->
     <string name="Username">Username</string>
     <string name="Password">Password</string>
     <string name="LogInButton">Log In</string>
@@ -23,41 +23,53 @@
     <string name="mail">E-mail address</string>
     <string name="registerButton">Sign up</string>
     <string name="title_activity_first">Loading &#8230;</string>
+    
+    <!-- Menu -->
+    <string name="action_logout">Logout</string>
+    <string name="add_location">Add Location</string>
+	<string name="search_location">Search for location</string>
+	
+	<!-- Add location -->
+	<string name="add_loc_name">Location Name</string>
+	<string name="add_description">Description</string>
+	<string name="add_latitude">Latitude</string>
+	<string name="add_longitude">Longitude</string>
+	<string name="add_photo">Photo URL</string>
+	<string name="get_current">Get current location</string>
+	<string name="open_map">Select location on map</string>
+	
+	
+    <!-- Location Layouts -->
+    <string name="AddRating">Add Rating</string>
+    <string name="DefaultComment">Comentariu</string>
+    <string name="RateButton">Vote</string>
+    <string name="AddToMyPlaces">Add to my places</string>
+    <string name="RemoveFromMyPlaces">Unsubscribe</string>
+    <string name="LocationDesc">Description: </string>
+    <string name="LocationCreateDate">Created on: </string>
+    <string name="LocRating">Location rating: </string>
+    <string name="LocCreatedBy">Created by: </string>
+    <string name="LocName">Location Name </string>
+    <string name="AddUpdate">Add Update</string>
+    <string name="UpdateVideoLink">Video Link</string>
+    <string name="UpdateReview">Enter Review</string>
+    <string name="UpdateButton">Add</string>
+    <string name="UpdateSelectPhoto">Select Photo</string>
+    <string name="RadioVideo">Video</string>
+    <string name="RadioImage">Photo</string>
+    <string name="RadioText">Text</string>
 
-	<string name="action_logout">Logout</string>
-	
-	<!-- Location Layouts -->
-	<string name="AddRating">Add Rating</string>
-	<string name="DefaultComment">Comentariu</string>
-	<string name="RateButton">Vote</string>
-	<string name="AddToMyPlaces">Add to my places</string>
-	<string name="RemoveFromMyPlaces">Unsubscribe</string>
-	<string name="LocationDesc">Description: </string>
-	<string name="LocationCreateDate">Created on: </string>
-	<string name="LocRating">Location rating: </string>
-	<string name="LocCreatedBy">Created by: </string>	
-	<string name="LocName">Location Name </string>
+    <!-- Main Activity -->
+    <string name="MapButton">Switch to map view</string>
+    <string name="PostedBy">Posted By</string>
 
-	<string name="AddUpdate">Add Update</string>
-	<string name="UpdateVideoLink">Video Link</string>
-	<string name="UpdateReview">Enter Review</string>
-	<string name="UpdateButton">Add</string>
-	<string name="UpdateSelectPhoto">Select Photo</string>
-	
-	<string name="RadioVideo">Video</string>
-	<string name="RadioImage">Photo</string>
-	<string name="RadioText">Text</string>
-	
-	<!-- Main Activity -->
-	<string name="MapButton">Switch to map view</string>
-	<string name="PostedBy">Posted By</string>
-	
-	<!-- User Profile -->
-	<string name="UsernameTitle">Username : </string>
-	<string name="RatingTitle">Rating : </string>
-	<string name="NameTitle">Name : </string>
-	<string name="SurnameTitle">Surname : </string>
-	<string name="MailTitle">Mail : </string>
-	<string name="UserPostsTitle">User\'s posts</string>
+    <!-- User Profile -->
+    <string name="UsernameTitle">Username : </string>
+    <string name="RatingTitle">Rating : </string>
+    <string name="NameTitle">Name : </string>
+    <string name="SurnameTitle">Surname : </string>
+    <string name="MailTitle">Mail : </string>
+    <string name="UserPostsTitle">User\'s posts</string>
+    <string name="title_activity_add_location">AddLocationActivity</string>
 
 </resources>
