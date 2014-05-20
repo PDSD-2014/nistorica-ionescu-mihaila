@@ -72,7 +72,18 @@
 			$error_message = "Your rating could not be posted. Please try again later";
 			$success_message = "Your rating has been posted succesfully";	
 		}break;
+		
+		case '6':{
+			$query = "INSERT INTO locations (user_id,latitude,longitude,location_name,description,image_url) 
+										VALUES ('".$message['user_id']."','".$message['latitude']."',
+												'".$message['longitude']."','".urldecode($message['location_name'])."',
+												'".$message['description']."','".$message['description']."')";
+			$error_message = "Location could not be added. Please try again later";
+			$success_message = "Location added succesfully";	
+		}break;
+		
 	}
+		
 	if(!$db->query($query)) {
 		Helpers::printResponse('error', $error_message);
 	}else{
