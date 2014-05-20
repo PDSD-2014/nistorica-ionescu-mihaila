@@ -75,9 +75,9 @@
 		
 		case '6':{
 			$query = "INSERT INTO locations (user_id,latitude,longitude,location_name,description,image_url) 
-										VALUES ('".$message['user_id']."','".$message['latitude']."',
-												'".$message['longitude']."','".urldecode($message['location_name'])."',
-												'".$message['description']."','".$message['description']."')";
+										VALUES ('".$message['user_id']."','".urldecode($message['latitude'])."',
+												'".urldecode($message['longitude'])."','".urldecode($message['location_name'])."',
+												'".urldecode($message['description'])."','".urldecode($message['image_url'])."')";
 			$error_message = "Location could not be added. Please try again later";
 			$success_message = "Location added succesfully";	
 		}break;
