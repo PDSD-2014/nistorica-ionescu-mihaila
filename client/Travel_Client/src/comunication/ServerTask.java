@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
 
+import add_location.MapViewActivity;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -142,7 +143,13 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 			}else if (type.equals("2")) {
 				RatingFragment.onPostExecute(act,this.finalResult);
 			}
-		}
+		}else if (this.functionName.equals("get_location_info.php")) {
+			
+			String type = this.parameters.get("type");
+			if(type.equals("2")){
+				MapViewActivity.onPostExecute(act, this.finalResult);
+			}
+		}		
 		this.loader.setVisibility(View.GONE);
 	}
 	

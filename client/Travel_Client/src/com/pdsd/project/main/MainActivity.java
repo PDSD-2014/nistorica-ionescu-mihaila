@@ -64,6 +64,11 @@ public class MainActivity extends Activity{
 		act.startActivity(intent);
 	}
 	
+	public void switchToMapView(View v){
+		Intent intent = new Intent(this,MapViewActivity.class);
+		startActivity(intent);
+		
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
