@@ -62,7 +62,7 @@
 		        android:id="@+id/addDescription"
 		        android:layout_width="fill_parent"
 		        android:layout_height="wrap_content"
-		        android:text="@string/DefaultComment"
+		        android:hint="@string/DefaultComment"
 		        android:paddingTop="10dp"
 		        android:inputType="text"
 		        android:layout_margin="5dp"

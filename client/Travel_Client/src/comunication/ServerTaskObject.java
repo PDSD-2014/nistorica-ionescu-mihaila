@@ -158,5 +158,6 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 		}
 		this.loader.setVisibility(View.GONE);		
 	}
+	
 
 }

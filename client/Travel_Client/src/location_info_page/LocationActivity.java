@@ -1,5 +1,7 @@
 package location_info_page;
 
+import login.Session;
+
 import org.json.JSONObject;
 
 import android.app.ActionBar;
@@ -7,11 +9,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.pdsd.project.main.MainActivity;
 import com.pdsd.project.main.R;
 import com.pdsd.project.main.TabListener;
 
@@ -57,13 +61,15 @@ public class LocationActivity extends Activity {
 		actionBar.addTab(updatesTab);
 		actionBar.addTab(ratingTab);
 		actionBar.setDisplayHomeAsUpEnabled(true);
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.location, menu);
-		return true;
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 	
 	public static void onPostExecute(Activity act, JSONObject result) {		
@@ -106,10 +112,18 @@ public class LocationActivity extends Activity {
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		
 	    switch (item.getItemId()) {
 	    case android.R.id.home:
-	    	this.finish();
+	        this.finish();
 	        return true;
+	    case R.id.action_logout:
+	    	Session.LogOut(this);
+	    	MainActivity.goToFirstActivity(this);
+	    	return true;
+	    case R.id.add_location:
+	    	MainActivity.goToAddLocation(this);
+	    	return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
