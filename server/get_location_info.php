@@ -38,7 +38,7 @@
 
 		}break;
 		case '2' :{
-			$query = "SELECT location_id latitude longitude location_name description FROM locations ";
+			$query = "SELECT location_id, latitude, longitude, location_name, description FROM locations ";
 									  
 			$result = $db->query($query);
 			if(!$result) {$response=null; break;}
