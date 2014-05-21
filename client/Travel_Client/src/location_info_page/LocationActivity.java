@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pdsd.project.main.R;
@@ -64,7 +65,7 @@ public class LocationActivity extends Activity {
 		return true;
 	}
 	
-	public static void onPostExecute(Activity act, JSONObject result) {
+	public static void onPostExecute(Activity act, JSONObject result) {		
 		try {
 			locationName = result.getString("location_name");
 			createdBy = result.getString("username");
@@ -72,32 +73,34 @@ public class LocationActivity extends Activity {
 			rating = result.getString("rating");
 			description = result.getString("description");
 			subscriptionStatus = result.getString("subscription");
+		
+			if(subscriptionStatus.equals("You are subscribed to this location")){
+					act.findViewById(R.id.favorite).setVisibility(View.GONE);
+					act.findViewById(R.id.unsubscribe).setVisibility(View.VISIBLE);
+				
+			}
+			
+			TextView locationNameField = (TextView) act.findViewById(R.id.locationname);
+			TextView usernameField = (TextView) act.findViewById(R.id.username);
+			TextView dateField = (TextView) act.findViewById(R.id.data);
+			TextView ratingAvgField = (TextView) act.findViewById(R.id.avg);
+			TextView descriptionField = (TextView) act.findViewById(R.id.descriptiontext);
+			TextView subscriptionStat = (TextView) act.findViewById(R.id.subscription_status);
+			
+			locationNameField.setText(locationName);
+			usernameField.setText(createdBy);
+			dateField.setText(createdData);
+			ratingAvgField.setText(rating);
+			descriptionField.setText(description);
+			subscriptionStat.setText(subscriptionStatus);
+			
+			LinearLayout location_info = (LinearLayout) act.findViewById(R.id.location_info);
+			location_info.setVisibility(View.VISIBLE);
 			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		if(subscriptionStatus.equals("You are subscribed to this location")){
-				act.findViewById(R.id.favorite).setVisibility(View.GONE);
-				act.findViewById(R.id.unsubscribe).setVisibility(View.VISIBLE);
-			
-		}
-		
-		TextView locationNameField = (TextView) act.findViewById(R.id.locationname);
-		TextView usernameField = (TextView) act.findViewById(R.id.username);
-		TextView dateField = (TextView) act.findViewById(R.id.data);
-		TextView ratingAvgField = (TextView) act.findViewById(R.id.avg);
-		TextView descriptionField = (TextView) act.findViewById(R.id.descriptiontext);
-		TextView subscriptionStat = (TextView) act.findViewById(R.id.subscription_status);
-		
-		locationNameField.setText(locationName);
-		usernameField.setText(createdBy);
-		dateField.setText(createdData);
-		ratingAvgField.setText(rating);
-		descriptionField.setText(description);
-		subscriptionStat.setText(subscriptionStatus);
-		
 	}
 
 }

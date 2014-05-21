@@ -123,6 +123,7 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 
 	@Override
     protected void onPostExecute(JSONObject obj) {
+		
 		if (this.functionName.equals("get_location_info.php")) {
 			LocationActivity.onPostExecute(act, this.finalResult);
 		}

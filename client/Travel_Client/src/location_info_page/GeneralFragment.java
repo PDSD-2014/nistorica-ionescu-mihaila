@@ -10,11 +10,13 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.pdsd.project.main.Common;
@@ -81,6 +83,5 @@ public class GeneralFragment extends Fragment {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }
