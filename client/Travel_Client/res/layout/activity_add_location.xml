@@ -25,6 +25,7 @@
         android:layout_alignLeft="@+id/get_current_button"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="62dp"
+        android:onClick="openMapClick"
         android:text="@string/open_map" />
 
     <Button

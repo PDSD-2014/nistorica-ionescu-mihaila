@@ -117,29 +117,24 @@ public class UpdateFragment extends Fragment {
 				
 				@Override
 				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					switch(checkedId){
-						case R.id.radioVideo :{
-							updateLayout.findViewById(R.id.select_photo)
-										.setVisibility(View.GONE);
-							updateLayout.findViewById(R.id.video_link)
-										.setVisibility(View.VISIBLE);
-							updateType="3";
-						}break;
-						case R.id.radioImage :{
-							updateLayout.findViewById(R.id.select_photo)
-										.setVisibility(View.VISIBLE);
-							updateLayout.findViewById(R.id.video_link)
-										.setVisibility(View.GONE);	
-							updateType="2";
-						}break;
-						default :{
-							updateLayout.findViewById(R.id.select_photo)
-										.setVisibility(View.GONE);
-							updateLayout.findViewById(R.id.video_link)
-										.setVisibility(View.GONE);
-							updateType="1";
-						}break;
-					
+					if (checkedId == R.id.radioVideo) {
+						updateLayout.findViewById(R.id.select_photo)
+									.setVisibility(View.GONE);
+						updateLayout.findViewById(R.id.video_link)
+									.setVisibility(View.VISIBLE);
+						updateType="3";
+					} else if (checkedId == R.id.radioImage) {
+						updateLayout.findViewById(R.id.select_photo)
+									.setVisibility(View.VISIBLE);
+						updateLayout.findViewById(R.id.video_link)
+									.setVisibility(View.GONE);
+						updateType="2";
+					} else {
+						updateLayout.findViewById(R.id.select_photo)
+									.setVisibility(View.GONE);
+						updateLayout.findViewById(R.id.video_link)
+									.setVisibility(View.GONE);
+						updateType="1";
 					}
 					
 				}
