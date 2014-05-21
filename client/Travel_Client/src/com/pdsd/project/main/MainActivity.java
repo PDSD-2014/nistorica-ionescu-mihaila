@@ -2,6 +2,7 @@ package com.pdsd.project.main;
 
 import login.FirstActivity;
 import login.Session;
+import add_location.AddLocationActivity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;

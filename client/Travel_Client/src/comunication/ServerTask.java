@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
-import location.RatingFragment;
-import location.UpdateFragment;
+import location_info_page.RatingFragment;
+import location_info_page.UpdateFragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;

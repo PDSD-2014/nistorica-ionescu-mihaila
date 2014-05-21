@@ -6,7 +6,7 @@ import java.io.FileInputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import location.UpdateFragment;
+import location_info_page.UpdateFragment;
 
 import android.app.Activity;
 import android.app.ProgressDialog;

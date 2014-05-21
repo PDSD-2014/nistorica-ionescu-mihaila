@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-import location.LocationActivity;
+import location_info_page.LocationActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;

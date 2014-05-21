@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import location.RatingListAdapter;
+import location_info_page.RatingListAdapter;
 import login.Session;
 
 import org.json.JSONArray;
