@@ -6,12 +6,13 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
-
 import comunication.PostServerTask;
 
 public class Session {
 	public static final String USERID = "user_id";
+	public static final String USERNAME = "username";
 	public static final String PREFS_NAME = "user_info";
 	
 	public static boolean isLogedIn(Activity ctx) {
@@ -46,5 +47,10 @@ public class Session {
 		SharedPreferences sharedPref = act.getSharedPreferences(Session.PREFS_NAME, 0);
 		return sharedPref.getString(Session.USERID, null);
 	}
-
+	
+	public static String getUserName(Activity act) {
+		SharedPreferences sharedPref = act.getSharedPreferences(Session.PREFS_NAME, 0);
+		return sharedPref.getString(Session.USERNAME, null);
+	}
+	
 }

@@ -33,12 +33,12 @@ public class UpdateListAdapter extends BaseAdapter {
 	Bitmap bmp;
 	public UpdateListAdapter(Context c,JSONArray array) {
 		mContext = c;
-		this.jsonArray = array;
+		this.setJsonArray(array);
 	}
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return jsonArray.length();
+		return getJsonArray().length();
 	}
 
 	@Override
@@ -65,11 +65,11 @@ public class UpdateListAdapter extends BaseAdapter {
 			ImageView image = (ImageView)rowView.findViewById(R.id.imageView);
 			int flagVideo = -1;
 			try {
-				review.setText(jsonArray.getJSONObject(position).getString("text"));
-				user.setText(jsonArray.getJSONObject(position).getString("username"));
-				flagVideo= jsonArray.getJSONObject(position).getInt("type");
-				urlMedia = jsonArray.getJSONObject(position).getString("url");
-				userId = jsonArray.getJSONObject(position).getString("user_id");
+				review.setText(getJsonArray().getJSONObject(position).getString("text"));
+				user.setText(getJsonArray().getJSONObject(position).getString("username"));
+				flagVideo= getJsonArray().getJSONObject(position).getInt("type");
+				urlMedia = getJsonArray().getJSONObject(position).getString("url");
+				userId = getJsonArray().getJSONObject(position).getString("user_id");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -125,6 +125,12 @@ public class UpdateListAdapter extends BaseAdapter {
 			});	
 		}
 		return rowView;
+	}
+	public JSONArray getJsonArray() {
+		return jsonArray;
+	}
+	public void setJsonArray(JSONArray jsonArray) {
+		this.jsonArray = jsonArray;
 	}
 
 }

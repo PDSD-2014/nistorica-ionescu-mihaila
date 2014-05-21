@@ -132,6 +132,7 @@ public class PostServerTask extends AsyncTask<Void, Void, JSONObject> {
 		    	SharedPreferences sharedPref = act.getSharedPreferences(Session.PREFS_NAME, 0);
 		    	SharedPreferences.Editor editor = sharedPref.edit();
 		    	editor.putString(Session.USERID, message);
+		    	editor.putString(Session.USERNAME, parameters.get(0).getValue());
 		    	editor.commit();
 		    	FirstActivity.goToMainActivity(act);
 			} else {

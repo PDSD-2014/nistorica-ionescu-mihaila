@@ -19,18 +19,18 @@ import android.widget.TextView;
 public class RatingListAdapter extends BaseAdapter {
 
 	private Context mContext;
-	JSONArray jsonArray;
+	private JSONArray jsonArray;
 	private String userId;
 	
 	public RatingListAdapter(Context c,JSONArray array) {
 		mContext = c;
-		this.jsonArray = array;
+		this.setJsonArray(array);
 	}
 	
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return jsonArray.length();
+		return getJsonArray().length();
 	}
 
 	@Override
@@ -63,11 +63,11 @@ public class RatingListAdapter extends BaseAdapter {
 		
 			try{
 	
-				user.setText(jsonArray.getJSONObject(position).getString("username"));
+				user.setText(getJsonArray().getJSONObject(position).getString("username"));
 				
-				rating.setText(jsonArray.getJSONObject(position).getString("value"));
+				rating.setText(getJsonArray().getJSONObject(position).getString("value"));
 				
-				int rateVal = Integer.parseInt(jsonArray.getJSONObject(position).getString("value"));
+				int rateVal = Integer.parseInt(getJsonArray().getJSONObject(position).getString("value"));
 				
 				if(rateVal >=8){
 					rating.setTextColor(Color.rgb(0,255,0));
@@ -79,14 +79,14 @@ public class RatingListAdapter extends BaseAdapter {
 					}
 				}
 				
-				descr.setText(jsonArray.getJSONObject(position).getString("body"));
-				date.setText(jsonArray.getJSONObject(position).getString("rating_date"));
+				descr.setText(getJsonArray().getJSONObject(position).getString("body"));
+				date.setText(getJsonArray().getJSONObject(position).getString("rating_date"));
 			}catch(JSONException je){
 				je.printStackTrace();
 			}
 			
 			try {
-				userId = jsonArray.getJSONObject(position).getString("user_id");
+				userId = getJsonArray().getJSONObject(position).getString("user_id");
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -103,6 +103,14 @@ public class RatingListAdapter extends BaseAdapter {
 			});
 		}
 		return rowView;
+	}
+
+	public JSONArray getJsonArray() {
+		return jsonArray;
+	}
+
+	public void setJsonArray(JSONArray jsonArray) {
+		this.jsonArray = jsonArray;
 	}
 	
 
