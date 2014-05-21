@@ -33,7 +33,7 @@ import comunication.ServerTaskObject;
 
 public class AddLocationActivity extends Activity implements
 			GooglePlayServicesClient.ConnectionCallbacks,
-			GooglePlayServicesClient.OnConnectionFailedListener{
+			GooglePlayServicesClient.OnConnectionFailedListener {
 
 	EditText locName,locDescript,locLat,locLon,photoURL;
 	Button getCurrent,openMap,addLocation;

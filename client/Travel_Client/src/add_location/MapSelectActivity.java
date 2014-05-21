@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMapClickListener;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pdsd.project.main.R;
@@ -20,12 +22,15 @@ public class MapSelectActivity extends Activity {
 	protected void onCreate(Bundle arg0) {
 		// TODO Auto-generated method stub
 		super.onCreate(arg0);
-		setContentView(R.layout.activity_map_select);
+		setContentView(R.layout.activity_map_select);		
 		
 		MapFragment smp = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 		gMap = smp.getMap();
+		LatLng pos = new LatLng(44.4167, 26.1000);
+		gMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+		
 		gMap.setOnMapClickListener(new OnMapClickListener() {
-			
+		
 			@Override
 			public void onMapClick(LatLng arg0) {
 				
