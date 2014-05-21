@@ -37,6 +37,19 @@
 			$response['subscription']= Helpers::get_subscription_status($message['user_id'],$location_id);
 
 		}break;
+		case '2' :{
+			$query = "SELECT location_id latitude longitude location_name description FROM locations ";
+									  
+			$result = $db->query($query);
+			if(!$result) {$response=null; break;}
+			$response=array();
+			$x=mysqli_fetch_array($result);
+			$response['location_id'] = $x['location_id'];
+			$response['location_name'] = $x['location_name'];
+			$response['latitude'] = $x['latitude'];
+			$response['longitude'] = $x['longitude'];
+			$response['description'] = $x['description'];
+		}break;
 	}
 	
 	
