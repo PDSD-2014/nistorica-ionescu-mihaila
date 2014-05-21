@@ -133,11 +133,13 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 		else if (this.functionName.equals("post_new.php")) {
 			String type = this.parameters.get("type");
 			
-			if(type.equals("3")){
+			if((type.equals("3") || type.equals("4"))){
 				GeneralFragment.onPostExecute(act, this.finalResult);
-			}else if(type.equals("2")){
+			}
+			else if(type.equals("2")){
 				RatingFragment.onPostExecute(act,this.finalResult);
-			}else if(type.equals("1")){
+			}
+			else if(type.equals("1")){
 				UpdateFragment.onPostExecute(act, this.finalResult);
 			}
 		}

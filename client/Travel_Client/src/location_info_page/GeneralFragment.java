@@ -10,14 +10,13 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.pdsd.project.main.Common;
 import com.pdsd.project.main.R;
@@ -65,7 +64,6 @@ public class GeneralFragment extends Fragment {
 				arguments.put("user_id", Session.getUserId(getActivity()));
 				ServerTaskObject serverTask = new ServerTaskObject("post_new.php", arguments, getActivity());
 				serverTask.execute();
-				
 			}
 		});
 		Map<String,String> arguments = new HashMap<String,String>();
@@ -79,6 +77,20 @@ public class GeneralFragment extends Fragment {
 	public static void onPostExecute(Activity act, JSONObject result) {
 		try {
 			Common.printError(act, result.getString("message"));
+			Button btn_unsub = (Button) act.findViewById(R.id.unsubscribe);
+			Button btn_fav = (Button) act.findViewById(R.id.favorite);
+			TextView status = (TextView) act.findViewById(R.id.subscription_status);
+			
+			if (btn_unsub.getVisibility() == View.VISIBLE) {
+				status.setVisibility(View.VISIBLE);
+				btn_unsub.setVisibility(View.GONE);
+				btn_fav.setVisibility(View.VISIBLE);
+			}
+			else {
+				status.setVisibility(View.GONE);
+				btn_unsub.setVisibility(View.VISIBLE);
+				btn_fav.setVisibility(View.GONE);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
