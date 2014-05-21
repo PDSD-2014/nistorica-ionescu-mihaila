@@ -80,7 +80,7 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 	
 	@Override
 	protected JSONObject doInBackground(Void... arg0) {
-		
+
 		String url = URLBuild();
 		Log.d("url", url);
 		StringBuilder content = new StringBuilder();
@@ -123,7 +123,6 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 
 	@Override
     protected void onPostExecute(JSONObject obj) {
-		
 		if (this.functionName.equals("get_location_info.php")) {
 			LocationActivity.onPostExecute(act, this.finalResult);
 		}
@@ -137,10 +136,16 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 				GeneralFragment.onPostExecute(act, this.finalResult);
 			}
 			else if(type.equals("2")){
+				
 				RatingFragment.onPostExecute(act,this.finalResult);
 			}
 			else if(type.equals("1")){
 				UpdateFragment.onPostExecute(act, this.finalResult);
+			} else if (type.equals("5")) {
+				if (UserProfileActivity.isButtonClicked) {
+					UserProfileActivity.isButtonClicked = false;
+					act.recreate();
+				}
 			}
 		}
 		this.loader.setVisibility(View.GONE);

@@ -47,15 +47,15 @@ public class MainActivity extends Activity{
 		return super.onCreateOptionsMenu(menu);
 	}
 	
-	public void goToFirstActivity() {
-		Intent intent = new Intent(this, FirstActivity.class);
-		startActivity(intent);
-    	finish();
+	public static void goToFirstActivity(Activity act) {
+		Intent intent = new Intent(act, FirstActivity.class);
+		act.startActivity(intent);
+    	act.finish();
     }
 	
-	public void goToAddLocation(){
-		Intent intent = new Intent(this,AddLocationActivity.class);
-		startActivity(intent);
+	public static void goToAddLocation(Activity act){
+		Intent intent = new Intent(act, AddLocationActivity.class);
+		act.startActivity(intent);
 	}
 	
 	@Override
@@ -64,9 +64,9 @@ public class MainActivity extends Activity{
 		if (itemId == R.id.search) {
 		} else if (itemId == R.id.action_logout) {
 			Session.LogOut(this);
-			goToFirstActivity();
+			goToFirstActivity(this);
 		} else if (itemId == R.id.add_location) {
-			goToAddLocation();
+			goToAddLocation(this);
 		}
 		return super.onOptionsItemSelected(item);
 	}

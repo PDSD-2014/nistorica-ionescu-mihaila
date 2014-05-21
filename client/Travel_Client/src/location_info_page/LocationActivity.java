@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,7 +21,6 @@ public class LocationActivity extends Activity {
 	GeneralFragment generalFragment = new GeneralFragment();
 	UpdateFragment updateFragment = new UpdateFragment();
 	RatingFragment ratingFragment = new RatingFragment();
-	
 	
 	/* Location informations */
 	public static String locationName = null;
@@ -56,6 +56,7 @@ public class LocationActivity extends Activity {
 		actionBar.addTab(generalTab);
 		actionBar.addTab(updatesTab);
 		actionBar.addTab(ratingTab);
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
@@ -101,6 +102,17 @@ public class LocationActivity extends Activity {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	    case android.R.id.home:
+	    	this.finish();
+	        return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
 
 }
