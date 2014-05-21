@@ -58,19 +58,14 @@ public class MainActivity extends Activity{
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
-		switch (item.getItemId()) {
-		case R.id.search:
-			break;
-		case R.id.action_logout:
+		int itemId = item.getItemId();
+		if (itemId == R.id.search) {
+		} else if (itemId == R.id.action_logout) {
 			Session.LogOut(this);
 			goToFirstActivity();
-			break;
-		case R.id.add_location:
+		} else if (itemId == R.id.add_location) {
 			goToAddLocation();
-			break;
-		default:
-			break;
+		} else {
 		}
 		return super.onOptionsItemSelected(item);
 	}

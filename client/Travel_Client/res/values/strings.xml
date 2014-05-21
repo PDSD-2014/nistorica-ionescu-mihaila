@@ -23,22 +23,21 @@
     <string name="mail">E-mail address</string>
     <string name="registerButton">Sign up</string>
     <string name="title_activity_first">Loading &#8230;</string>
-    
+
     <!-- Menu -->
     <string name="action_logout">Logout</string>
     <string name="add_location">Add Location</string>
-	<string name="search_location">Search for location</string>
-	
-	<!-- Add location -->
-	<string name="add_loc_name">Location Name</string>
-	<string name="add_description">Description</string>
-	<string name="add_latitude">Latitude</string>
-	<string name="add_longitude">Longitude</string>
-	<string name="add_photo">Photo URL</string>
-	<string name="get_current">Get current location</string>
-	<string name="open_map">Select location on map</string>
-	
-	
+    <string name="search_location">Search for location</string>
+
+    <!-- Add location -->
+    <string name="add_loc_name">Location Name</string>
+    <string name="add_description">Description</string>
+    <string name="add_latitude">Latitude</string>
+    <string name="add_longitude">Longitude</string>
+    <string name="add_photo">Photo URL</string>
+    <string name="get_current">Get current location</string>
+    <string name="open_map">Select location on map</string>
+
     <!-- Location Layouts -->
     <string name="AddRating">Add Rating</string>
     <string name="DefaultComment">Comentariu</string>
@@ -71,5 +70,6 @@
     <string name="MailTitle">Mail : </string>
     <string name="UserPostsTitle">User\'s posts</string>
     <string name="title_activity_add_location">AddLocationActivity</string>
+    <string name="title_activity_map_select">MapSelectActivity</string>
 
 </resources>

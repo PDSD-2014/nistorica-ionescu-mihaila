@@ -8,31 +8,45 @@ import java.util.Map;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import location.LocationActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
+
 import login.Session;
 
 import comunication.ServerTaskObject;
 
+import android.location.Location;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 import android.support.v4.app.NavUtils;
 
-public class AddLocationActivity extends Activity {
+
+public class AddLocationActivity extends Activity implements
+			GooglePlayServicesClient.ConnectionCallbacks,
+			GooglePlayServicesClient.OnConnectionFailedListener{
 
 	EditText locName,locDescript,locLat,locLon,photoURL;
 	Button getCurrent,openMap,addLocation;
+	LocationClient mLocClient;
+    Location mCurrentLocation;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_location);
 		// Show the Up button in the action bar.
 		setupActionBar();
+
+		mLocClient = new LocationClient(this,this,this);
 		
 		locName = (EditText) findViewById(R.id.add_location_name);
 		locDescript = (EditText) findViewById(R.id.add_location_description);
@@ -49,19 +63,16 @@ public class AddLocationActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				mCurrentLocation = mLocClient.getLastLocation();
+				double la = mCurrentLocation.getLatitude();
+				double lo = mCurrentLocation.getLongitude();
 				
+				locLat.setText(String.valueOf(la));
+				locLon.setText(String.valueOf(lo));
 			}
 		});
-		
-		openMap.setOnClickListener(new OnClickListener() {
 			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
+
 	}
 
 	public void addLocationClick (View v){
@@ -92,6 +103,15 @@ public class AddLocationActivity extends Activity {
 		
 		ServerTaskObject serverTaskObj = new ServerTaskObject("post_new.php",arg,this);
 		serverTaskObj.execute();
+		
+	}
+	
+	public void openMapClick(View v){
+		
+		Intent intent = new Intent(this,com.pdsd.project.main.MapSelectActivity.class);
+		
+		startActivity(intent);
+		
 		
 	}
 	
@@ -132,6 +152,30 @@ public class AddLocationActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	@Override
+	protected void onStart() {
+		super.onStart();
+		mLocClient.connect();
+
+	}
+	@Override
+	public void onConnectionFailed(ConnectionResult arg0) {
+		// TODO Auto-generated method stub
+		Toast.makeText(this, "Could not connect to location services", 
+				Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onDisconnected() {
+		Toast.makeText(this, "Disconnected from locations services", 
+				Toast.LENGTH_SHORT).show();
+		
 	}
 
 }
