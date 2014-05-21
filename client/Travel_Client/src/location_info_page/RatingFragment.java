@@ -2,8 +2,10 @@ package location_info_page;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,9 +16,9 @@ import org.json.JSONObject;
 
 import com.pdsd.project.main.Common;
 import com.pdsd.project.main.R;
+
 import comunication.ServerTask;
 import comunication.ServerTaskObject;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -36,6 +38,8 @@ public class RatingFragment extends Fragment {
     
 	static LinearLayout ratingScrollView;
 	Spinner spinnerRating;
+	static JSONArray jsonLocalCopy;
+	static RatingListAdapter ratingAdapter;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -78,6 +82,20 @@ public class RatingFragment extends Fragment {
 				arg.put("body",comentariu);
 				arg.put("user_id",Session.getUserId(getActivity()));
 				
+				JSONObject jsonObj= new JSONObject();
+				try {
+					jsonObj.put("value", value);
+					jsonObj.put("body", comentariu);
+					jsonObj.put("username", Session.getUserName(getActivity()));
+					jsonObj.put("rating_date", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
+					jsonLocalCopy.put(jsonObj);
+					ratingAdapter.setJsonArray(jsonLocalCopy);
+					ratingAdapter.notifyDataSetChanged();
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				ServerTaskObject serverTaskObj = new ServerTaskObject("post_new.php",arg,getActivity());
 				serverTaskObj.execute();
 			}
@@ -93,13 +111,17 @@ public class RatingFragment extends Fragment {
 	public static void onPostExecute(Activity act, JSONArray result) {
 			ListView ratingList = (ListView) act.findViewById(R.id.rating_list);
 			if (ratingList != null) {
-				ratingList.setAdapter(new RatingListAdapter(act, result));
+				jsonLocalCopy = result;
+				ratingAdapter = new RatingListAdapter(act, jsonLocalCopy);
+				ratingList.setAdapter(ratingAdapter);
+				
 			}
 	}
 
 	public static void onPostExecute(Activity act, JSONObject obj){
 			try{
 				Common.printError(act, obj.getString("message"));
+				
 			} catch(JSONException e){
 				e.printStackTrace();
 			}		
