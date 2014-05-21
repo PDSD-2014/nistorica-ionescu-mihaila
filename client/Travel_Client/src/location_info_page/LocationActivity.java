@@ -6,7 +6,9 @@ import org.json.JSONObject;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,6 +27,7 @@ public class LocationActivity extends Activity {
 	GeneralFragment generalFragment = new GeneralFragment();
 	UpdateFragment updateFragment = new UpdateFragment();
 	RatingFragment ratingFragment = new RatingFragment();
+	String selectedTabTag = "com.android.pdsd.prject.selectedTab";
 	
 	/* Location informations */
 	public static String locationName = null;
@@ -62,6 +65,9 @@ public class LocationActivity extends Activity {
 		actionBar.addTab(ratingTab);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		
+		SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+		int selectedTab = sharedPref.getInt(this.selectedTabTag, 0);
+		actionBar.setSelectedNavigationItem(selectedTab);
 	}
 
 	@Override
@@ -124,6 +130,17 @@ public class LocationActivity extends Activity {
 	    case R.id.add_location:
 	    	MainActivity.goToAddLocation(this);
 	    	return true;
+	    case R.id.search:
+			ActionBar actionBar = getActionBar();
+			int selectedTab = actionBar.getSelectedNavigationIndex();
+			
+			SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sharedPref.edit();
+			editor.putInt(selectedTabTag, selectedTab);
+			editor.commit();
+
+			this.recreate();
+			return true;
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }

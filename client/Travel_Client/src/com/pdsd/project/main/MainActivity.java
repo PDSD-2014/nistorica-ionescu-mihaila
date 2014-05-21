@@ -5,7 +5,9 @@ import login.Session;
 import add_location.AddLocationActivity;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +20,7 @@ public class MainActivity extends Activity{
 	ActionBar.Tab myPlacesTab,newsFeedTab;
 	MyPlacesFragment myPlacesFragment = new MyPlacesFragment();
 	NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
+	String selectedTabTag = "com.android.pdsd.prject.selectedTab";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class MainActivity extends Activity{
 		actionBar.addTab(myPlacesTab);
 		actionBar.addTab(newsFeedTab);
 
+		SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+		int selectedTab = sharedPref.getInt(this.selectedTabTag, 0);
+		actionBar.setSelectedNavigationItem(selectedTab);
 	}
 
 	@Override
@@ -62,6 +68,15 @@ public class MainActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		if (itemId == R.id.search) {
+			ActionBar actionBar = getActionBar();
+			int selectedTab = actionBar.getSelectedNavigationIndex();
+			
+			SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+			SharedPreferences.Editor editor = sharedPref.edit();
+			editor.putInt(selectedTabTag, selectedTab);
+			editor.commit();
+
+			this.recreate();
 		} else if (itemId == R.id.action_logout) {
 			Session.LogOut(this);
 			goToFirstActivity(this);
