@@ -3,7 +3,6 @@ package add_location;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,7 +12,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pdsd.project.main.R;
 
-public class MapSelectActivity extends FragmentActivity {
+public class MapSelectActivity extends Activity {
 
 	GoogleMap gMap;
 	double lastLat, lastLon;
@@ -23,8 +22,7 @@ public class MapSelectActivity extends FragmentActivity {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_map_select);
 		
-		MapFragment smp = (MapFragment) 
-				getFragmentManager().findFragmentById(R.id.map);
+		MapFragment smp = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
 		gMap = smp.getMap();
 		gMap.setOnMapClickListener(new OnMapClickListener() {
 			
@@ -49,6 +47,7 @@ public class MapSelectActivity extends FragmentActivity {
 	
 	@Override
 	public void onBackPressed() {
+		
 		// TODO Auto-generated method stub
 		Intent result = new Intent();
 		
@@ -58,7 +57,6 @@ public class MapSelectActivity extends FragmentActivity {
 		setResult(Activity.RESULT_OK,result);
 		
 		finish();
-		
 
 	}
 }
