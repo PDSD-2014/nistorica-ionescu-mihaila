@@ -54,7 +54,30 @@
 	        android:layout_margin="@dimen/elemMargin"
 	        android:background="@drawable/button_custom"
 	        android:padding="5dp" />
-	
+	    
+	    <LinearLayout
+			android:id="@+id/loader"
+			android:orientation="horizontal" 
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:visibility="gone"
+			 >
+			<ProgressBar
+				android:layout_margin="10dp"
+				android:id="@+id/progressBar1"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				/>
+			<TextView
+			    android:layout_margin="10dp"
+			    android:textSize="16sp"
+			    android:text="Verifying credentials ..."
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center"
+			    />
+		</LinearLayout>
 	
 	</LinearLayout>
 </ScrollView>

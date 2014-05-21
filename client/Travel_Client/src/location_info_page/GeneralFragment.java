@@ -27,16 +27,16 @@ public class GeneralFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		ScrollView generalLayout = (ScrollView) inflater.inflate(R.layout.general_info_loc, container,false);
+		ScrollView generalLayout = (ScrollView) inflater.inflate(R.layout.general_info_loc, container,false);		
+		return generalLayout;
 
-		Button addToMyPlaces = (Button)generalLayout.findViewById(R.id.favorite);
-		
-		Map<String,String> arguments = new HashMap<String,String>();
-		arguments.put("location_id", LocationActivity.locationId);
-		arguments.put("type", "1");
-		arguments.put("user_id", Session.getUserId(getActivity()));
-		ServerTaskObject serverTask = new ServerTaskObject("get_location_info.php", arguments, getActivity());
-		serverTask.execute();
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		Button addToMyPlaces = (Button) getActivity().findViewById(R.id.favorite);
 		
 		addToMyPlaces.setOnClickListener(new OnClickListener() {
 			
@@ -51,7 +51,7 @@ public class GeneralFragment extends Fragment {
 			}
 		});
 		
-		Button unsubscribe = (Button) generalLayout.findViewById(R.id.unsubscribe);
+		Button unsubscribe = (Button) getActivity().findViewById(R.id.unsubscribe);
 		
 		unsubscribe.setOnClickListener(new OnClickListener() {
 			
@@ -66,9 +66,12 @@ public class GeneralFragment extends Fragment {
 				
 			}
 		});
-		
-		return generalLayout;
-
+		Map<String,String> arguments = new HashMap<String,String>();
+		arguments.put("location_id", LocationActivity.locationId);
+		arguments.put("type", "1");
+		arguments.put("user_id", Session.getUserId(getActivity()));
+		ServerTaskObject serverTask = new ServerTaskObject("get_location_info.php", arguments, getActivity());
+		serverTask.execute();
 	}
 	
 	public static void onPostExecute(Activity act, JSONObject result) {

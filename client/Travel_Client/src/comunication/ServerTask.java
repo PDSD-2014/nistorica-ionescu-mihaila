@@ -19,14 +19,15 @@ import org.json.JSONException;
 import org.json.JSONTokener;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.pdsd.project.main.Common;
 import com.pdsd.project.main.MyPlacesFragment;
 import com.pdsd.project.main.NewsFeedFragment;
+import com.pdsd.project.main.R;
 import com.pdsd.project.main.UserProfileActivity;
 
 
@@ -37,15 +38,8 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 	private Map<String, String> parameters;
 	private HttpResponse response;
 	
-	/* Loading message */
-	private ProgressDialog progress = null;
-	private String dialogTitle = null;
-	
 	/* Caller activity */
 	private Activity act = null;
-	
-	/* Task */
-	private ServerTask task = null;
 	
 	String errorMessage = null;
 	
@@ -54,11 +48,15 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 	/* Result */
 	JSONArray finalResult = new JSONArray();
 	
+	/* Progress bar */
+	LinearLayout loader;
+	
 	public ServerTask(String method,Map<String, String> arg, Activity act){
 		this.functionName = method;
 		this.parameters = arg;
 		this.act = act;
-		this.task = this;
+		this.loader = (LinearLayout) act.findViewById(R.id.loader);
+		this.loader.setVisibility(View.VISIBLE);
 	}
 
 	private String URLBuild(){
@@ -74,42 +72,10 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 	@Override
 	protected void onPreExecute () {
 
-		/* Initialize Progress Dialog */
-		progress = new ProgressDialog(act);
-		
-		if (this.dialogTitle != null) {
-			progress.setTitle(this.dialogTitle);
-		}
-		
-		progress.setMessage("Waiting for data from server ...");
-		
-		progress.setIndeterminate(true);
-		progress.setCancelable(false);
-		
-		/* Button Cancel */
-		progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-		    @Override
-		    public void onClick(DialogInterface dialog, int which) {
-
-		        /* Cancel task */
-		    	if (task != null) {
-		    		task.cancel(true);
-		    	}
-
-		        /* Cancel http post */
-		        if (httpPost != null) {
-		        	httpPost.abort();
-		        }
-		        errorMessage = "Action canceled.";
-		    }
-		});
-		
-		progress.show();
-		
 		if (!connectionTest.isConnected(act)) {
 			this.cancel(true);
 		}
-		
+
 	}
 	
 	@Override
@@ -176,19 +142,17 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 			}else if (type.equals("2")) {
 				RatingFragment.onPostExecute(act,this.finalResult);
 			}
-			
 		}
-		progress.dismiss();
+		this.loader.setVisibility(View.GONE);
 	}
 	
 	@Override
 	protected void onCancelled (JSONArray obj) {
-			
-		progress.dismiss();
+
 		if (errorMessage != null) {
 			Common.printError(act, errorMessage);
 		}
-		
+		this.loader.setVisibility(View.GONE);
 	}
 
 }

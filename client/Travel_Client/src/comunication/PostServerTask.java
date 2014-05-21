@@ -19,12 +19,13 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.pdsd.project.main.Common;
+import com.pdsd.project.main.R;
 
 
 public class PostServerTask extends AsyncTask<Void, Void, JSONObject> {
@@ -34,19 +35,16 @@ public class PostServerTask extends AsyncTask<Void, Void, JSONObject> {
 	private ArrayList<NameValuePair> parameters;
 	private HttpResponse response;
 	
-	/* Loading message */
-	private ProgressDialog progress = null;
-	private String dialogTitle = null;
-	
 	/* Caller activity */
 	private Activity act = null;
-	
-	/* Task */
-	private PostServerTask task = null;
+
 	
 	String errorMessage = null;
 	
 	HttpPost httpPost = null;
+	
+	/* Progress bar */
+	LinearLayout loader;
 	
 	/* Result */
 	JSONObject finalResult = new JSONObject();
@@ -55,7 +53,8 @@ public class PostServerTask extends AsyncTask<Void, Void, JSONObject> {
 		this.functionName = method;
 		this.parameters = arg;
 		this.act = act;
-		this.task = this;
+		this.loader = (LinearLayout) act.findViewById(R.id.loader);
+		this.loader.setVisibility(View.VISIBLE);
 	}
 
 	private String URLBuild(){
@@ -66,43 +65,9 @@ public class PostServerTask extends AsyncTask<Void, Void, JSONObject> {
 	
 	@Override
 	protected void onPreExecute () {
-
-		/* Initialize Progress Dialog */
-		progress = new ProgressDialog(act);
-		
-		if (this.dialogTitle != null) {
-			progress.setTitle(this.dialogTitle);
-		}
-		
-		progress.setMessage("Waiting for data from server ...");
-		
-		progress.setIndeterminate(true);
-		progress.setCancelable(false);
-		
-		/* Button Cancel */
-		progress.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
-		    @Override
-		    public void onClick(DialogInterface dialog, int which) {
-
-		        /* Cancel task */
-		    	if (task != null) {
-		    		task.cancel(true);
-		    	}
-
-		        /* Cancel http post */
-		        if (httpPost != null) {
-		        	httpPost.abort();
-		        }
-		        errorMessage = "Action canceled.";
-		    }
-		});
-		
-		progress.show();
-		
 		if (!connectionTest.isConnected(act)) {
 			this.cancel(true);
 		}
-		
 	}
 	
 	@Override
@@ -176,17 +141,16 @@ public class PostServerTask extends AsyncTask<Void, Void, JSONObject> {
 		else if (this.functionName == "register.php") {
 			Common.printError(act, message);
 		}
-		progress.dismiss();
+		this.loader.setVisibility(View.GONE);
 	}
 	
 	@Override
 	protected void onCancelled (JSONObject obj) {
-			
-		progress.dismiss();
+
 		if (errorMessage != null) {
 			Common.printError(act, errorMessage);
 		}
-		
+		this.loader.setVisibility(View.GONE);
 	}
 
 }

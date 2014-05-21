@@ -27,14 +27,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-
 public class MyPlacesListAdapter extends BaseAdapter {
 
 	private Context mContext;
 	JSONArray jsonArray;
 	Bitmap bmp;
 	private String urlMedia;
-	public MyPlacesListAdapter(Context c,JSONArray array) {
+	
+	
+	public MyPlacesListAdapter(Context c, JSONArray array) {
 		mContext = c;
 		this.jsonArray = array;
 	}

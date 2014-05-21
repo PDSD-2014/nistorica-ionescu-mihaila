@@ -40,7 +40,13 @@ public class RatingFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 	    
-		ratingScrollView = (LinearLayout) inflater.inflate(R.layout.rating_loc_list, container, false);
+		ratingScrollView = (LinearLayout) inflater.inflate(R.layout.rating_loc_list, container, false);	
+		return ratingScrollView;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
 		
 		spinnerRating = (Spinner) ratingScrollView.findViewById(R.id.spinner);
 		List<String> rates = new ArrayList<String>();
@@ -48,7 +54,7 @@ public class RatingFragment extends Fragment {
 		rates = Arrays.asList(ratesStr);
 		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,rates);
 		spinnerRating.setAdapter(spinnerAdapter);
-		
+
 		Button voteButton = (Button) ratingScrollView.findViewById(R.id.rate);
 		voteButton.setOnClickListener(new OnClickListener() {
 			
@@ -82,15 +88,15 @@ public class RatingFragment extends Fragment {
 		
 		ServerTask serverTask = new ServerTask("get_rating.php",arg,getActivity());
 		serverTask.execute();
-		
-		return ratingScrollView;
 	}
+	
 	public static void onPostExecute(Activity act, JSONArray result) {
-
 			ListView ratingList = (ListView) act.findViewById(R.id.rating_list);
-			ratingList.setAdapter(new RatingListAdapter(act, result));
-
+			if (ratingList != null) {
+				ratingList.setAdapter(new RatingListAdapter(act, result));
+			}
 	}
+
 	public static void onPostExecute(Activity act, JSONObject obj){
 			try{
 				Common.printError(act, obj.getString("message"));

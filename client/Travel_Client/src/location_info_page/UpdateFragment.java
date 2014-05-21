@@ -47,109 +47,8 @@ public class UpdateFragment extends Fragment {
 	
 	static String fileName;
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		
-	        updateLayout = (LinearLayout) inflater.inflate(R.layout.updates_loc_list, container, false);
-			String locationId = LocationActivity.locationId;
-			
-			Map<String,String> arguments = new HashMap<String,String>();
-			arguments.put("type", "3");
-			arguments.put("location_id", locationId);
-			ServerTask serverTask = new ServerTask("get_update.php", arguments, getActivity());
-			serverTask.execute();
-			typeRG=	(RadioGroup)updateLayout.findViewById(R.id.radioType);
-			newReview = (EditText)updateLayout.findViewById(R.id.review);
-			videoLink = (EditText)updateLayout.findViewById(R.id.video_link);
-			
-			Button add = (Button) updateLayout.findViewById(R.id.add);
-			add.setOnClickListener(new View.OnClickListener() {
-			
-				@Override
-				public void onClick(View v) {
-					String review = newReview.getText().toString();
-					try {
-						review=URLEncoder.encode(review, "UTF-8");
-					} catch (UnsupportedEncodingException e) {
-						e.printStackTrace();
-					}
-					if (review == null || review.isEmpty()){
-						
-						Toast.makeText(getActivity(), "Review empty!",Toast.LENGTH_SHORT).show();
-					}
-					else{
-						Map<String,String> arguments = new HashMap<String,String>();
-						arguments.put("type","1");
-						if(updateType.equals("1")){
-							
-						}else {
-							if(updateType.equals("2")){
-								String photoUrl = "http://happy-box.ro/travelhelper/img/"+fileName;
-								try{
-									photoUrl=URLEncoder.encode(photoUrl,"UTF-8");
-								}catch(UnsupportedEncodingException e){
-									e.printStackTrace();
-								}
-								arguments.put("url",photoUrl);
-							}else{
-								String videoUrl = videoLink.getText().toString();
-								try{
-									videoUrl=URLEncoder.encode(videoUrl,"UTF-8");
-								}catch(UnsupportedEncodingException e){
-									e.printStackTrace();
-								}
-								arguments.put("url",videoUrl);
-							}
-						}
-						
-						arguments.put("user_id", Session.getUserId(getActivity()));
-						arguments.put("location_id", LocationActivity.locationId);
-						arguments.put("update_type", updateType);
-						arguments.put("update_text", review);
-						ServerTaskObject serverTask2 = new ServerTaskObject("post_new.php", arguments, getActivity());
-						serverTask2.execute();
-					}
-					
-				}
-			});
-			
-			typeRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-				
-				@Override
-				public void onCheckedChanged(RadioGroup group, int checkedId) {
-					if (checkedId == R.id.radioVideo) {
-						updateLayout.findViewById(R.id.select_photo)
-									.setVisibility(View.GONE);
-						updateLayout.findViewById(R.id.video_link)
-									.setVisibility(View.VISIBLE);
-						updateType="3";
-					} else if (checkedId == R.id.radioImage) {
-						updateLayout.findViewById(R.id.select_photo)
-									.setVisibility(View.VISIBLE);
-						updateLayout.findViewById(R.id.video_link)
-									.setVisibility(View.GONE);
-						updateType="2";
-					} else {
-						updateLayout.findViewById(R.id.select_photo)
-									.setVisibility(View.GONE);
-						updateLayout.findViewById(R.id.video_link)
-									.setVisibility(View.GONE);
-						updateType="1";
-					}
-					
-				}
-			});
-			
-			Button selectPhoto = (Button) updateLayout.findViewById(R.id.select_photo);
-			selectPhoto.setOnClickListener(new View.OnClickListener() {
-				
-				@Override
-				public void onClick(View v) {
-					openGallery(SELECT_FILE_CODE);
-					
-				}
-			});
-			
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	    updateLayout = (LinearLayout) inflater.inflate(R.layout.updates_loc_list, container, false);		
 		return updateLayout;
 		
 	}
@@ -181,6 +80,109 @@ public class UpdateFragment extends Fragment {
 		
 		
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+
+		String locationId = LocationActivity.locationId;
+		Map<String,String> arguments = new HashMap<String,String>();
+		arguments.put("type", "3");
+		arguments.put("location_id", locationId);
+		ServerTask serverTask = new ServerTask("get_update.php", arguments, getActivity());
+		serverTask.execute();
+		typeRG=	(RadioGroup)updateLayout.findViewById(R.id.radioType);
+		newReview = (EditText)updateLayout.findViewById(R.id.review);
+		videoLink = (EditText)updateLayout.findViewById(R.id.video_link);
+		
+		Button add = (Button) updateLayout.findViewById(R.id.add);
+		add.setOnClickListener(new View.OnClickListener() {
+		
+			@Override
+			public void onClick(View v) {
+				String review = newReview.getText().toString();
+				try {
+					review=URLEncoder.encode(review, "UTF-8");
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				if (review == null || review.isEmpty()){
+					
+					Toast.makeText(getActivity(), "Review empty!",Toast.LENGTH_SHORT).show();
+				}
+				else{
+					Map<String,String> arguments = new HashMap<String,String>();
+					arguments.put("type","1");
+					if(updateType.equals("1")){
+						
+					}else {
+						if(updateType.equals("2")){
+							String photoUrl = "http://happy-box.ro/travelhelper/img/"+fileName;
+							try{
+								photoUrl=URLEncoder.encode(photoUrl,"UTF-8");
+							}catch(UnsupportedEncodingException e){
+								e.printStackTrace();
+							}
+							arguments.put("url",photoUrl);
+						}else{
+							String videoUrl = videoLink.getText().toString();
+							try{
+								videoUrl=URLEncoder.encode(videoUrl,"UTF-8");
+							}catch(UnsupportedEncodingException e){
+								e.printStackTrace();
+							}
+							arguments.put("url",videoUrl);
+						}
+					}
+					
+					arguments.put("user_id", Session.getUserId(getActivity()));
+					arguments.put("location_id", LocationActivity.locationId);
+					arguments.put("update_type", updateType);
+					arguments.put("update_text", review);
+					ServerTaskObject serverTask2 = new ServerTaskObject("post_new.php", arguments, getActivity());
+					serverTask2.execute();
+				}
+				
+			}
+		});
+		
+		typeRG.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if (checkedId == R.id.radioVideo) {
+					updateLayout.findViewById(R.id.select_photo)
+								.setVisibility(View.GONE);
+					updateLayout.findViewById(R.id.video_link)
+								.setVisibility(View.VISIBLE);
+					updateType="3";
+				} else if (checkedId == R.id.radioImage) {
+					updateLayout.findViewById(R.id.select_photo)
+								.setVisibility(View.VISIBLE);
+					updateLayout.findViewById(R.id.video_link)
+								.setVisibility(View.GONE);
+					updateType="2";
+				} else {
+					updateLayout.findViewById(R.id.select_photo)
+								.setVisibility(View.GONE);
+					updateLayout.findViewById(R.id.video_link)
+								.setVisibility(View.GONE);
+					updateType="1";
+				}
+				
+			}
+		});
+		
+		Button selectPhoto = (Button) updateLayout.findViewById(R.id.select_photo);
+		selectPhoto.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				openGallery(SELECT_FILE_CODE);
+				
+			}
+		});
 	}
 	
 	public static void onPostExecute(Activity act, JSONArray result) {

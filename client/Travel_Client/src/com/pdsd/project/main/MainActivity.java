@@ -18,24 +18,25 @@ public class MainActivity extends Activity{
 	ActionBar.Tab myPlacesTab,newsFeedTab;
 	MyPlacesFragment myPlacesFragment = new MyPlacesFragment();
 	NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		ActionBar actionBar = getActionBar();
-		
+
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		myPlacesTab = actionBar.newTab();
 		newsFeedTab = actionBar.newTab();
 		myPlacesTab.setText(MY_PLACES);
 		newsFeedTab.setText(NEWS_FEED);
-		
+
 		myPlacesTab.setTabListener(new TabListener(myPlacesFragment));
 		newsFeedTab.setTabListener(new TabListener(newsFeedFragment));
-		
+
 		actionBar.addTab(myPlacesTab);
 		actionBar.addTab(newsFeedTab);
-		
+
 	}
 
 	@Override
@@ -66,7 +67,6 @@ public class MainActivity extends Activity{
 			goToFirstActivity();
 		} else if (itemId == R.id.add_location) {
 			goToAddLocation();
-		} else {
 		}
 		return super.onOptionsItemSelected(item);
 	}
