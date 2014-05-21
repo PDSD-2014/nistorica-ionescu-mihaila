@@ -43,12 +43,18 @@
 			$result = $db->query($query);
 			if(!$result) {$response=null; break;}
 			$response=array();
-			$x=mysqli_fetch_array($result);
-			$response['location_id'] = $x['location_id'];
-			$response['location_name'] = $x['location_name'];
-			$response['latitude'] = $x['latitude'];
-			$response['longitude'] = $x['longitude'];
-			$response['description'] = $x['description'];
+			$count=0;
+			while($x=mysqli_fetch_array($result)){
+				$line = array();
+				$line['location_id'] = $x['location_id'];
+				$line['location_name'] = $x['location_name'];
+				$line['latitude'] = $x['latitude'];
+				$line['longitude'] = $x['longitude'];
+				$line['description'] = $x['description'];
+				
+				$response[$count] = $line;
+				$count+=1;
+			}
 		}break;
 	}
 	
