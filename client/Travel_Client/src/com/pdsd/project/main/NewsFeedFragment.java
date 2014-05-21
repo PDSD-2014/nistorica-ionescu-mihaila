@@ -5,11 +5,7 @@ import java.util.Map;
 
 import login.Session;
 
-
-
 import org.json.JSONArray;
-
-import comunication.ServerTask;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -19,6 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+
+import comunication.ServerTask;
 
 
 public class NewsFeedFragment extends Fragment {
@@ -37,6 +35,9 @@ public class NewsFeedFragment extends Fragment {
 	
 	public static void onPostExecute(Activity act, JSONArray result) {
 		ListView myPlacesListView = (ListView) act.findViewById(R.id.news_feed_list);
-		myPlacesListView.setAdapter(new MyPlacesListAdapter(act,result));
+
+		if ( (myPlacesListView != null) && (result != null) ) {	
+			myPlacesListView.setAdapter(new MyPlacesListAdapter(act,result));
+		}
 	}
 }

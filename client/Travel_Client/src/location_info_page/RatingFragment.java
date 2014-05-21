@@ -94,8 +94,9 @@ public class RatingFragment extends Fragment {
 	public static void onPostExecute(Activity act, JSONObject obj){
 			try{
 				Common.printError(act, obj.getString("message"));
-			}catch(JSONException e){e.printStackTrace();}
-			
+			} catch(JSONException e){
+				e.printStackTrace();
+			}		
 	}
 
 }

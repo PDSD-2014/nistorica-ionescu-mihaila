@@ -199,8 +199,11 @@ public class UpdateFragment extends Fragment {
 	
 	public static void onPostExecute(Activity act , String result){
 		fileName = result;
-		((Button)updateLayout.findViewById(R.id.select_photo)).setText(fileName);
-		((Button)updateLayout.findViewById(R.id.select_photo)).setEnabled(false);
+		try {
+			((Button)updateLayout.findViewById(R.id.select_photo)).setText(fileName);
+			((Button)updateLayout.findViewById(R.id.select_photo)).setEnabled(false);
+		} catch (Exception e) {
+		}
 	}
 		
 }

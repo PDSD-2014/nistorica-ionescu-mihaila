@@ -21,7 +21,7 @@
 
   // Check if nume and prenume are not empty
   if ( (strlen($_POST['nume'] > 0))
-    && (strlen($_POST['prenume'] > 0)) 
+    && (strlen($_POST['prenume'] > 0))
   ) {
     Helpers::printResponse('error', 'Campurile nume si prenume trebuie sa fie completate');
   }
@@ -49,16 +49,15 @@
   $prenume = $db->real_escape_string($_POST['prenume']);
   $mail = $db->real_escape_string($_POST['mail']);
 
-  $queryString = 
+  $queryString =
     "INSERT INTO users (username, password, nume, prenume, mail)"
     . " VALUES ('" . $username . "', '" . $hashedPass . "', '"
     . $nume . "', '" . $prenume . "', '" . $mail .  "')";
 
   $query = $db->query($queryString);
-  
+
   if ($query === FAlSE) {
     Helpers::printResponse('error', 'Insert failed');
   }
 
-  var_dump(strlen($hashedPass));
   Helpers::printResponse('success', 'User was created. Please sign in.');
