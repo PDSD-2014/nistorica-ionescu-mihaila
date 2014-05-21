@@ -5,16 +5,21 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import login.Session;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
-import android.content.Intent;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
+
+import login.Session;
+
+import comunication.ServerTaskObject;
+
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
+import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,18 +27,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import comunication.ServerTaskObject;
+import android.support.v4.app.NavUtils;
 
 
 public class AddLocationActivity extends Activity implements
-	GooglePlayServicesClient.ConnectionCallbacks,
-	GooglePlayServicesClient.OnConnectionFailedListener{
+			GooglePlayServicesClient.ConnectionCallbacks,
+			GooglePlayServicesClient.OnConnectionFailedListener{
 
 	EditText locName,locDescript,locLat,locLon,photoURL;
 	Button getCurrent,openMap,addLocation;
 	LocationClient mLocClient;
     Location mCurrentLocation;
+    
+    static int MAP_RESULT = 5555;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -106,8 +112,7 @@ public class AddLocationActivity extends Activity implements
 		
 		Intent intent = new Intent(this,com.pdsd.project.main.MapSelectActivity.class);
 		
-		startActivity(intent);
-		
+		startActivityForResult(intent,MAP_RESULT);
 		
 	}
 	
@@ -116,6 +121,26 @@ public class AddLocationActivity extends Activity implements
 			Common.printError(act, obj.getString("message"));
 		}catch(JSONException e){e.printStackTrace();}
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		switch(requestCode){
+		case (5555) :{
+			
+			if(resultCode == Activity.RESULT_OK){
+				double la = data.getDoubleExtra("lat", 0.0);
+				double lo = data.getDoubleExtra("lon", 0.0);
+				
+				locLat.setText(String.valueOf(la));
+				locLon.setText(String.valueOf(lo));
+			}
+		}break;
+		
+		}
 	}
 	/**
 	 * Set up the {@link android.app.ActionBar}.
