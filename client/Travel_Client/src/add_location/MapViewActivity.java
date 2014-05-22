@@ -5,15 +5,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 import location_info_page.LocationActivity;
+import login.Session;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +27,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.pdsd.project.main.MainActivity;
 import com.pdsd.project.main.R;
 import comunication.ServerTask;
 
@@ -66,7 +72,9 @@ public class MapViewActivity extends Activity {
 				}
 			}
 		});
-
+		
+		ActionBar actionBar = getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 	
 	static void updateMap(MarkerOptions marker , Integer l){
@@ -100,5 +108,35 @@ public class MapViewActivity extends Activity {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+	    switch (item.getItemId()) {
+	    case android.R.id.home:
+	        this.finish();
+	        return true;
+	    case R.id.action_logout:
+	    	Session.LogOut(this);
+	    	MainActivity.goToFirstActivity(this);
+	    	return true;
+	    case R.id.add_location:
+	    	MainActivity.goToAddLocation(this);
+	    	return true;
+	    case R.id.search:
+			this.recreate();
+			return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 }

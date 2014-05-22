@@ -2,25 +2,15 @@ package location_info_page;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import login.Session;
 
-
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.pdsd.project.main.Common;
-import com.pdsd.project.main.R;
-
-import comunication.ServerTask;
-import comunication.ServerTaskObject;
-import comunication.UploadServerTask;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -35,6 +25,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import com.pdsd.project.main.Common;
+import com.pdsd.project.main.R;
+import comunication.ServerTask;
+import comunication.ServerTaskObject;
+import comunication.UploadServerTask;
 
 public class UpdateFragment extends Fragment {
 
@@ -204,6 +200,9 @@ public class UpdateFragment extends Fragment {
 	
 	public static void onPostExecute(Activity act, JSONArray result) {
 		ListView updateList = (ListView) act.findViewById(R.id.updates_list);
+		if ((updateList == null) && (result == null)) {
+			return;
+		}
 		updateListAdapter = new UpdateListAdapter(act,result);
 		jsonLocalCopy = result;
 		updateList.setAdapter(updateListAdapter);

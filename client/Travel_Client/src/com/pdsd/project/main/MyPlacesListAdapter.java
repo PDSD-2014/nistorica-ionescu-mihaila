@@ -80,7 +80,6 @@ public class MyPlacesListAdapter extends BaseAdapter {
 			TextView location = (TextView)rowView.findViewById(R.id.location);
 			TextView review = (TextView)rowView.findViewById(R.id.review);
 			TextView date = (TextView)rowView.findViewById(R.id.date);
-			TextView rating = (TextView)rowView.findViewById(R.id.location_rating);
 			review.setOnClickListener(new View.OnClickListener() {
 				
 				@Override
@@ -97,7 +96,6 @@ public class MyPlacesListAdapter extends BaseAdapter {
 			holder.review = review;
 			holder.user = user;
 			holder.date = date;
-			holder.rating = rating;
 			
 			rowView.setTag(holder);
 			
@@ -118,7 +116,6 @@ public class MyPlacesListAdapter extends BaseAdapter {
 			flagVideo= jsonArray.getJSONObject(position).getInt("type");
 			urlMedia = jsonArray.getJSONObject(position).getString("url");
 			holder.date.setText( jsonArray.getJSONObject(position).getString("date"));
-			holder.rating.setText(jsonArray.getJSONObject(position).getString("location_rating"));
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -192,7 +189,6 @@ public class MyPlacesListAdapter extends BaseAdapter {
 		public String loc_id;
 		public String user_id;
 		public TextView date;
-		public TextView rating;
 	}
 	
 	public class MyLocationOnClickListener implements OnClickListener
