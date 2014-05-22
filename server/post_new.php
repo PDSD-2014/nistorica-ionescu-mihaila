@@ -87,7 +87,17 @@
 	if(!$db->query($query)) {
 		Helpers::printResponse('error', $error_message);
 	}else{
-		Helpers::printResponse('success', $success_message);
+		if ($type == 6) {
+                        $response = array(
+                                'status' => 'success',
+                                'message' => $success_message,
+                                'location_id' => $db->insert_id,
+                        );
+                        echo json_encode($response);
+                }
+                else {
+			Helpers::printResponse('success', $success_message);
+		}
 	}
 	
 ?>
