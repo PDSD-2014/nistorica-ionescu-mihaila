@@ -45,6 +45,7 @@ public class UpdateFragment extends Fragment {
 	static UpdateListAdapter updateListAdapter;
 	static JSONArray jsonLocalCopy;
 	static String fileName;
+	static Activity localAct;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 	    updateLayout = (LinearLayout) inflater.inflate(R.layout.updates_loc_list, container, false);		
@@ -145,8 +146,18 @@ public class UpdateFragment extends Fragment {
 						jsonObj.put("text", review);
 						jsonObj.put("username", Session.getUserName(getActivity()));
 						jsonObj.put("type", updateType);
-						jsonLocalCopy.put(jsonObj);
-						updateListAdapter.setJsonArray(jsonLocalCopy);
+						JSONObject previous = (JSONObject)jsonLocalCopy.get(0);
+						JSONObject previousCopy;
+						jsonLocalCopy.put(0, jsonObj);
+						for (int i = 1; i < jsonLocalCopy.length();i++){
+							previousCopy = previous;
+							previous = (JSONObject)jsonLocalCopy.get(i);
+							jsonLocalCopy.put(i, previousCopy);						
+						}
+						jsonLocalCopy.put(previous);
+						updateListAdapter = new UpdateListAdapter(localAct,jsonLocalCopy);
+						ListView updateList = (ListView) localAct.findViewById(R.id.updates_list);
+						updateList.setAdapter(updateListAdapter);
 						updateListAdapter.notifyDataSetChanged();
 					} catch (JSONException e) {
 						// TODO Auto-generated catch block
@@ -204,9 +215,9 @@ public class UpdateFragment extends Fragment {
 			if ((updateList == null) && (result == null)) {
 				return;
 			}
-			updateListAdapter = new UpdateListAdapter(act,result);
+			localAct = act;
 			jsonLocalCopy = result;
-	
+			updateListAdapter = new UpdateListAdapter(act,jsonLocalCopy);
 			updateList.setAdapter(updateListAdapter);
 		} catch (Exception e) {
 		}

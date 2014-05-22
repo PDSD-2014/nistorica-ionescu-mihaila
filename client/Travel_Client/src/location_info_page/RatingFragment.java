@@ -27,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.webkit.JsPromptResult;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -40,6 +41,7 @@ public class RatingFragment extends Fragment {
 	Spinner spinnerRating;
 	static JSONArray jsonLocalCopy;
 	static RatingListAdapter ratingAdapter;
+	static Activity localAct;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -88,8 +90,18 @@ public class RatingFragment extends Fragment {
 					jsonObj.put("body", comentariu);
 					jsonObj.put("username", Session.getUserName(getActivity()));
 					jsonObj.put("rating_date", new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()));
-					jsonLocalCopy.put(jsonObj);
-					ratingAdapter.setJsonArray(jsonLocalCopy);
+					JSONObject previous = (JSONObject)jsonLocalCopy.get(0);
+					JSONObject previousCopy;
+					jsonLocalCopy.put(0, jsonObj);
+					for (int i = 1; i < jsonLocalCopy.length();i++){
+						previousCopy = previous;
+						previous = (JSONObject)jsonLocalCopy.get(i);
+						jsonLocalCopy.put(i, previousCopy);						
+					}
+					jsonLocalCopy.put(previous);
+					ratingAdapter = new RatingListAdapter(localAct,jsonLocalCopy);
+					ListView ratingList = (ListView) localAct.findViewById(R.id.rating_list);
+					ratingList.setAdapter(ratingAdapter);
 					ratingAdapter.notifyDataSetChanged();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -112,6 +124,7 @@ public class RatingFragment extends Fragment {
 			ListView ratingList = (ListView) act.findViewById(R.id.rating_list);
 			if (ratingList != null) {
 				jsonLocalCopy = result;
+				localAct = act;
 				ratingAdapter = new RatingListAdapter(act, jsonLocalCopy);
 				ratingList.setAdapter(ratingAdapter);
 				
