@@ -149,7 +149,7 @@ public class ServerTask extends AsyncTask<Void, Void, JSONArray> {
 			if(type.equals("2")){
 				MapViewActivity.onPostExecute(act, this.finalResult);
 			}
-		}		
+		}
 		this.loader.setVisibility(View.GONE);
 	}
 	

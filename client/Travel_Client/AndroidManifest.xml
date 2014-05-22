@@ -67,16 +67,15 @@
         <activity
             android:name="add_location.MapSelectActivity"
             android:label="@string/title_activity_map_select" >
+        </activity>      
+        <activity
+            android:name="add_location.MapViewActivity"
+            android:label="@string/title_activity_map_view" >
         </activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name="add_location.MapViewActivity"
-            android:label="@string/title_activity_map_view" >
-        </activity>
     </application>
 
 </manifest>

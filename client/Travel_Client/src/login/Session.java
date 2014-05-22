@@ -6,8 +6,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
+
 import comunication.PostServerTask;
 
 public class Session {

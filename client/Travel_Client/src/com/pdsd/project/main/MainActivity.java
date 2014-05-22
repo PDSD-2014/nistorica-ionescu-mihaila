@@ -3,6 +3,7 @@ package com.pdsd.project.main;
 import login.FirstActivity;
 import login.Session;
 import add_location.AddLocationActivity;
+import add_location.MapViewActivity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
@@ -12,12 +13,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 public class MainActivity extends Activity{
 
 	private final static String MY_PLACES="My Places";
 	private final static String NEWS_FEED="News Feed";
-	ActionBar.Tab myPlacesTab,newsFeedTab;
+	ActionBar.Tab myPlacesTab, newsFeedTab;
 	MyPlacesFragment myPlacesFragment = new MyPlacesFragment();
 	NewsFeedFragment newsFeedFragment = new NewsFeedFragment();
 	String selectedTabTag = "com.android.pdsd.prject.selectedTab";
@@ -65,10 +67,10 @@ public class MainActivity extends Activity{
 	}
 	
 	public void switchToMapView(View v){
-		Intent intent = new Intent(this,MapViewActivity.class);
+		Intent intent = new Intent(this, MapViewActivity.class);
 		startActivity(intent);
-		
 	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();

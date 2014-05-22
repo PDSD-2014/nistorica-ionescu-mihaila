@@ -3,7 +3,6 @@ package add_location;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import location_info_page.LocationActivity;
 
@@ -11,6 +10,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,18 +23,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.pdsd.project.main.R;
-
 import comunication.ServerTask;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-
 public class MapViewActivity extends Activity {
-	
-
-	
 	GoogleMap gMap;
 	static MapFragment smp;
 	static ArrayList<Marker> markers = new ArrayList<Marker>();

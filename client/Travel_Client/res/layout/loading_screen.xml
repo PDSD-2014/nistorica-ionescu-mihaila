@@ -10,9 +10,9 @@
        android:orientation="horizontal" 
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
-       android:layout_gravity="center"
-       android:visibility="gone"
-        >
+       android:layout_gravity="center_horizontal"
+       android:visibility="gone" >
+
 		<ProgressBar
 		   android:layout_margin="10dp"
 		   android:id="@+id/progressBar1"

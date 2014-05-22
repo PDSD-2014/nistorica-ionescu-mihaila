@@ -98,7 +98,7 @@ public class UpdateFragment extends Fragment {
 		typeRG=	(RadioGroup)updateLayout.findViewById(R.id.radioType);
 		newReview = (EditText)updateLayout.findViewById(R.id.reviewedit);
 		videoLink = (EditText)updateLayout.findViewById(R.id.video_link);
-		
+
 		Button add = (Button) updateLayout.findViewById(R.id.add);
 		add.setOnClickListener(new View.OnClickListener() {
 		
