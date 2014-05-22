@@ -1,11 +1,15 @@
 package com.pdsd.project.main;
 
-import android.os.Bundle;
+import login.Session;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 public class ImageViewActivity extends Activity {
@@ -19,13 +23,38 @@ public class ImageViewActivity extends Activity {
 		Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
 		ImageView image = (ImageView) findViewById(R.id.imageView);
 		image.setImageBitmap(bmp);
+		
+		ActionBar actionBar = this.getActionBar();
+		actionBar.setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.image_view, menu);
-		return true;
+		MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.main, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+	    switch (item.getItemId()) {
+	    case android.R.id.home:
+	        this.finish();
+	        return true;
+	    case R.id.action_logout:
+	    	Session.LogOut(this);
+	    	MainActivity.goToFirstActivity(this);
+	    	return true;
+	    case R.id.add_location:
+	    	MainActivity.goToAddLocation(this);
+	    	return true;
+	    case R.id.search:
+			this.recreate();
+			return true;
+	    default:
+	        return super.onOptionsItemSelected(item);
+	    }
 	}
 
 }

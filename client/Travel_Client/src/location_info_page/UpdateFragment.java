@@ -199,13 +199,17 @@ public class UpdateFragment extends Fragment {
 	}
 	
 	public static void onPostExecute(Activity act, JSONArray result) {
-		ListView updateList = (ListView) act.findViewById(R.id.updates_list);
-		if ((updateList == null) && (result == null)) {
-			return;
+		try {
+			ListView updateList = (ListView) act.findViewById(R.id.updates_list);
+			if ((updateList == null) && (result == null)) {
+				return;
+			}
+			updateListAdapter = new UpdateListAdapter(act,result);
+			jsonLocalCopy = result;
+	
+			updateList.setAdapter(updateListAdapter);
+		} catch (Exception e) {
 		}
-		updateListAdapter = new UpdateListAdapter(act,result);
-		jsonLocalCopy = result;
-		updateList.setAdapter(updateListAdapter);
 	}
 	
 	public static void onPostExecute(Activity act, JSONObject result) {
