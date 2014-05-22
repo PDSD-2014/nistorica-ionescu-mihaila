@@ -36,7 +36,7 @@ public class AddLocationActivity extends Activity implements
 			GooglePlayServicesClient.ConnectionCallbacks,
 			GooglePlayServicesClient.OnConnectionFailedListener {
 
-	EditText locName,locDescript,locLat,locLon,photoURL;
+	EditText locName,locDescript,locLat,locLon;
 	Button getCurrent,openMap,addLocation;
 	LocationClient mLocClient;
     Location mCurrentLocation;
@@ -59,7 +59,6 @@ public class AddLocationActivity extends Activity implements
 		locDescript = (EditText) findViewById(R.id.add_location_description);
 		locLat = (EditText) findViewById(R.id.add_location_latitude);
 		locLon = (EditText) findViewById(R.id.add_location_longitude);
-		photoURL = (EditText) findViewById(R.id.add_photo_addr);
 		
 		getCurrent = (Button) findViewById(R.id.get_current_button);
 		openMap = (Button) findViewById(R.id.select_on_map);
@@ -83,30 +82,29 @@ public class AddLocationActivity extends Activity implements
 	}
 
 	public void addLocationClick (View v){
-		String name,lat,lon,url;
+		String name,lat,lon;
 		name = locName.getText().toString();
 		lat = locLat.getText().toString();
 		lon = locLon.getText().toString();
 		desc = locDescript.getText().toString();
-		url = photoURL.getText().toString();
+
 		try {
 			name = URLEncoder.encode(name,"UTF-8");
 			lat = URLEncoder.encode(lat,"UTF-8");
 			lon = URLEncoder.encode(lon,"UTF-8");
 			desc = URLEncoder.encode(desc,"UTF-8");
-			url = URLEncoder.encode(url,"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		
 		Map<String,String> arg = new HashMap<String,String>();
-		arg.put("type","6");
-		arg.put("latitude",lat);
-		arg.put("longitude",lon);
-		arg.put("location_name",name);
+		arg.put("type", "6");
+		arg.put("latitude", lat);
+		arg.put("longitude", lon);
+		arg.put("location_name", name);
 		arg.put("description",desc);
-		arg.put("image_url",url);
-		arg.put("user_id",Session.getUserId(this));
+		arg.put("image_url", "");
+		arg.put("user_id", Session.getUserId(this));
 	
 		ServerTaskObject serverTaskObj = new ServerTaskObject("post_new.php",arg,this);
 		serverTaskObj.execute();
@@ -131,13 +129,18 @@ public class AddLocationActivity extends Activity implements
 		if (lastLocationId!=null){
 			Map<String,String> arguments = new HashMap<String,String>();
 			arguments.put("type","1");
-			arguments.put("user_id", Session.getUserId(act));
-			arguments.put("location_id", lastLocationId);
-			arguments.put("update_type", "1");
-			arguments.put("update_text", desc);
-			ServerTaskObject serverTask2 = new ServerTaskObject("post_new.php", arguments, act);
-			serverTask2.execute();
-			act.finish();
+			try {
+				arguments.put("user_id", URLEncoder.encode(Session.getUserId(act),"UTF-8"));
+				arguments.put("location_id", URLEncoder.encode(lastLocationId,"UTF-8"));
+				arguments.put("update_type", "1");
+				arguments.put("update_text", URLEncoder.encode("New location was created! Description: " + desc,"UTF-8"));
+				ServerTaskObject serverTask2 = new ServerTaskObject("post_new.php", arguments, act);
+				serverTask2.execute();
+				act.finish();
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 	}

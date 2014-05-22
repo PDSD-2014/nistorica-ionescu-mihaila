@@ -13,7 +13,7 @@
        android:background="#33B5E5"
        android:id="@+id/loader"
        android:orientation="horizontal" 
-       android:layout_width="fill_parent"
+       android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_gravity="center"
        android:visibility="gone"
@@ -31,6 +31,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center"
 		    android:textColor="#fff"
+		    android:text="Sending request ..."
 		    />
 	</LinearLayout>
     <EditText
@@ -87,13 +88,6 @@
         android:layout_margin="@dimen/elemMargin"
 	    android:background="@drawable/button_custom"
 	    android:padding="5dp"  />
-
-    <EditText
-        android:id="@+id/add_photo_addr"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/add_photo" />
 
     <Button
         android:id="@+id/add_location_button"
