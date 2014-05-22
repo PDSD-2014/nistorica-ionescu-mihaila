@@ -28,6 +28,7 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
 import com.pdsd.project.main.Common;
 import com.pdsd.project.main.R;
+
 import comunication.ServerTaskObject;
 
 
@@ -41,14 +42,17 @@ public class AddLocationActivity extends Activity implements
     Location mCurrentLocation;
     
     static int MAP_RESULT = 5555;
-
+    
+    static String desc;
+    static Activity act;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_location);
 		// Show the Up button in the action bar.
 		setupActionBar();
-
+		
+		act = this;
 		mLocClient = new LocationClient(this,this,this);
 		
 		locName = (EditText) findViewById(R.id.add_location_name);
@@ -79,7 +83,7 @@ public class AddLocationActivity extends Activity implements
 	}
 
 	public void addLocationClick (View v){
-		String name,lat,lon,desc,url;
+		String name,lat,lon,url;
 		name = locName.getText().toString();
 		lat = locLat.getText().toString();
 		lon = locLon.getText().toString();
@@ -103,10 +107,10 @@ public class AddLocationActivity extends Activity implements
 		arg.put("description",desc);
 		arg.put("image_url",url);
 		arg.put("user_id",Session.getUserId(this));
-		
+	
 		ServerTaskObject serverTaskObj = new ServerTaskObject("post_new.php",arg,this);
 		serverTaskObj.execute();
-		
+			
 	}
 	
 	public void openMapClick(View v){
@@ -117,9 +121,24 @@ public class AddLocationActivity extends Activity implements
 	}
 	
 	public static void onPostExecute(Activity act, JSONObject obj){
+		String lastLocationId = null;
 		try{
+			if (obj.has("location_id"))
+				lastLocationId = obj.getString("location_id");
 			Common.printError(act, obj.getString("message"));
 		}catch(JSONException e){e.printStackTrace();}
+		
+		if (lastLocationId!=null){
+			Map<String,String> arguments = new HashMap<String,String>();
+			arguments.put("type","1");
+			arguments.put("user_id", Session.getUserId(act));
+			arguments.put("location_id", lastLocationId);
+			arguments.put("update_type", "1");
+			arguments.put("update_text", desc);
+			ServerTaskObject serverTask2 = new ServerTaskObject("post_new.php", arguments, act);
+			serverTask2.execute();
+			act.finish();
+		}
 		
 	}
 	

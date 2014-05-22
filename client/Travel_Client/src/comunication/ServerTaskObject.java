@@ -20,6 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import add_location.AddLocationActivity;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -140,12 +141,18 @@ public class ServerTaskObject extends AsyncTask<Void, Void, JSONObject> {
 				RatingFragment.onPostExecute(act,this.finalResult);
 			}
 			else if(type.equals("1")){
-				UpdateFragment.onPostExecute(act, this.finalResult);
+				if (act.getClass().getName().equals("add_location.AddLocationActivity"))
+					AddLocationActivity.onPostExecute(act, this.finalResult);
+				else
+					UpdateFragment.onPostExecute(act, this.finalResult);
 			} else if (type.equals("5")) {
 				if (UserProfileActivity.isButtonClicked) {
 					UserProfileActivity.isButtonClicked = false;
 					act.recreate();
 				}
+			}
+			else if (type.equals("6")){
+				AddLocationActivity.onPostExecute(act, this.finalResult);
 			}
 		}
 		this.loader.setVisibility(View.GONE);
